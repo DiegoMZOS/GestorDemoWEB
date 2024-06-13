@@ -1,0 +1,355 @@
+﻿@{
+    ViewBag.Title = "Colaboradores";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<ol class="breadcrumb mb-4 mt-4">
+    <li class="breadcrumb-item"><a href="index.html">Resumen</a></li>
+    <li class="breadcrumb-item active">Colaboradores</li>
+</ol>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <!-- Icons here -->
+</svg>
+
+<h4 class="mt-4 mb-3 text-left">Información General</h4>
+<form id="formColaborador">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="txtNombresColaborador" class="form-label">Nombres</label>
+                <input type="text" class="form-control" id="txtNombresColaborador">
+            </div>
+            <div class="mb-3">
+                <label for="txtApellidoPaterno" class="form-label">Apellido Paterno</label>
+                <input type="text" class="form-control" id="txtApellidoPaterno">
+            </div>
+            <div class="mb-3">
+                <label for="txtApellidoMaterno" class="form-label">Apellido Materno</label>
+                <input type="text" class="form-control" id="txtApellidoMaterno">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="txtDireccion" class="form-label">Dirección</label>
+                <input type="text" class="form-control" id="txtDireccion">
+            </div>
+            <div class="mb-3">
+                <label for="ddlTipoDocumento" class="form-label">Tipo Documento</label>
+                <select class="form-control" id="ddlTipoDocumento">
+                    <option value="DNI">DNI</option>
+                    <option value="Pasaporte">Pasaporte</option>
+                    <option value="Cédula">Cédula</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="txtNacionalidad" class="form-label">Nacionalidad</label>
+                <input type="text" class="form-control" id="txtNacionalidad">
+            </div>
+            <div class="mb-3">
+                <label for="txtPuestoTrabajo" class="form-label">Puesto de Trabajo</label>
+                <input type="text" class="form-control" id="txtPuestoTrabajo">
+            </div>
+            <div class="mb-3">
+                <label for="txtSexo" class="form-label">Sexo</label>
+                <input type="text" class="form-control" id="txtSexo">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="chkEstadoTrabajador">
+                <label class="form-check-label" for="chkEstadoTrabajador">
+                    Estado Trabajador
+                </label>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="row mt-3">
+    <div class="col-12">
+        <button type="button" class="btn btn-primary" onclick="GuardarNuevoColaborador()">Guardar</button>
+    </div>
+</div>
+
+
+<br />
+
+<div class="form-group">
+    <form action="" method="post" name="" enctype="multipart/form-data">
+        <label class="col-xs-2 control-label">Documentacion :</label>
+        <div class="col-xs-6">
+            <input type="text" ng-model="archivo" class="form-control" value="Adjuntar archivo" />
+            <input type="file" name="archivo" value="archivo" size="80" />
+        </div>
+        <div class="col-xs-6">
+            <input type="text" ng-model="archivo" class="form-control" value="Adjuntar archivo" />
+            <input type="file" name="archivo" value="archivo" size="80" />
+        </div>
+        <div class="col-xs-6">
+            <input type="text" ng-model="archivo" class="form-control" value="Adjuntar archivo" />
+            <input type="file" name="archivo" value="archivo" size="80" />
+        </div>
+    </form>
+</div>
+
+<br />
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-person-booth me-1"></i> Información del Colaborador
+    </div>
+
+    <div class="card-body">
+        <hr />
+        <table id="tablaColaboradores" class="display cell-border" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Nombres</th>
+                    <th>Apellido Paterno</th>
+                    <th>Apellido Materno</th>
+                    <th>Dirección</th>
+                    <th>Tipo Documento</th>
+                    <th>Nacionalidad</th>
+                    <th>Puesto de Trabajo</th>
+                    <th>Sexo</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- MODAL EDITAR -->
+<div class="modal fade" id="FormModalColaborador" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="exampleModalLabel">Editar Colaborador</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body g-2">
+                <input id="txtIdColaborador" type="hidden" value="0" />
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label for="txtNombresColaboradorEdit" class="form-label">Nombres</label>
+                        <input type="text" class="form-control" id="txtNombresColaboradorEdit">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="txtApellidoPaternoEdit" class="form-label">Apellido Paterno</label>
+                        <input type="text" class="form-control" id="txtApellidoPaternoEdit">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="txtApellidoMaternoEdit" class="form-label">Apellido Materno</label>
+                        <input type="text" class="form-control" id="txtApellidoMaternoEdit">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="txtDireccionEdit" class="form-label">Dirección</label>
+                        <input type="text" class="form-control" id="txtDireccionEdit">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="ddlTipoDocumentoEdit" class="form-label">Tipo Documento</label>
+                        <select class="form-control" id="ddlTipoDocumentoEdit">
+                            <option value="DNI">DNI</option>
+                            <option value="Pasaporte">Pasaporte</option>
+                            <option value="Cédula">Cédula</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="txtNacionalidadEdit" class="form-label">Nacionalidad</label>
+                        <input type="text" class="form-control" id="txtNacionalidadEdit">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="txtPuestoTrabajoEdit" class="form-label">Puesto de Trabajo</label>
+                        <input type="text" class="form-control" id="txtPuestoTrabajoEdit">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="txtSexoEdit" class="form-label">Sexo</label>
+                        <input type="text" class="form-control" id="txtSexoEdit">
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="chkEstadoTrabajadorEdit">
+                            <label class="form-check-label" for="chkEstadoTrabajadorEdit">
+                                Estado Trabajador
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="GuardarDatosColaborador()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            ListarColaboradores();
+        });
+
+        function ListarColaboradores() {
+            $.ajax({
+                url: '@Url.Action("ListarColaboradores", "Home")',
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    $('#tablaColaboradores').DataTable({
+                        "data": data.data,
+                        "columns": [
+                            { "data": "NombresColaborador" },
+                            { "data": "ApellidoPaterno" },
+                            { "data": "ApellidoMaterno" },
+                            { "data": "Direccion" },
+                            { "data": "TipoDocumento" },
+                            { "data": "NacionalidadColaborador" },
+                            { "data": "PuestoTrabajo" },
+                            { "data": "SexoColaborador" },
+                            { "data": "EstadoTrabajador", "render": function (data) {
+                                    return data ? 'Activo' : 'Inactivo';
+                                }
+                            },
+                            {
+                                "data": "IdColaborador",
+                                "render": function (data) {
+                                    return `
+                                        <button class='btn btn-warning btn-sm' onclick='EditarColaborador(${data})'>Editar</button>
+                                        <button class='btn btn-danger btn-sm' onclick='BorrarColaborador(${data})'>Borrar</button>
+                                    `;
+                                }
+                            }
+                        ]
+                    });
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function GuardarNuevoColaborador() {
+            var colaborador = {
+                NombresColaborador: $("#txtNombresColaborador").val(),
+                ApellidoPaterno: $("#txtApellidoPaterno").val(),
+                ApellidoMaterno: $("#txtApellidoMaterno").val(),
+                Direccion: $("#txtDireccion").val(),
+                TipoDocumento: $("#ddlTipoDocumento").val(),
+                NacionalidadColaborador: $("#txtNacionalidad").val(),
+                PuestoTrabajo: $("#txtPuestoTrabajo").val(),
+                SexoColaborador: $("#txtSexo").val(),
+                EstadoTrabajador: $("#chkEstadoTrabajador").is(":checked")
+            };
+
+            $.ajax({
+                url: '@Url.Action("RegistrarColaborador", "Home")',
+                type: "POST",
+                data: JSON.stringify(colaborador),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.success) {
+                        alert(data.message);
+                        $('#tablaColaboradores').DataTable().ajax.reload();
+                    } else {
+                        alert(data.message);
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function EditarColaborador(idColaborador) {
+            $.ajax({
+                url: '@Url.Action("ListarColaboradores", "Home")',
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    var colaborador = data.data.find(x => x.IdColaborador === idColaborador);
+
+                    if (colaborador) {
+                        $("#txtIdColaborador").val(colaborador.IdColaborador);
+                        $("#txtNombresColaboradorEdit").val(colaborador.NombresColaborador);
+                        $("#txtApellidoPaternoEdit").val(colaborador.ApellidoPaterno);
+                        $("#txtApellidoMaternoEdit").val(colaborador.ApellidoMaterno);
+                        $("#txtDireccionEdit").val(colaborador.Direccion);
+                        $("#ddlTipoDocumentoEdit").val(colaborador.TipoDocumento);
+                        $("#txtNacionalidadEdit").val(colaborador.NacionalidadColaborador);
+                        $("#txtPuestoTrabajoEdit").val(colaborador.PuestoTrabajo);
+                        $("#txtSexoEdit").val(colaborador.SexoColaborador);
+                        $("#chkEstadoTrabajadorEdit").prop("checked", colaborador.EstadoTrabajador);
+
+                        $("#FormModalColaborador").modal("show");
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function GuardarDatosColaborador() {
+            var colaborador = {
+                IdColaborador: $("#txtIdColaborador").val(),
+                NombresColaborador: $("#txtNombresColaboradorEdit").val(),
+                ApellidoPaterno: $("#txtApellidoPaternoEdit").val(),
+                ApellidoMaterno: $("#txtApellidoMaternoEdit").val(),
+                Direccion: $("#txtDireccionEdit").val(),
+                TipoDocumento: $("#ddlTipoDocumentoEdit").val(),
+                NacionalidadColaborador: $("#txtNacionalidadEdit").val(),
+                PuestoTrabajo: $("#txtPuestoTrabajoEdit").val(),
+                SexoColaborador: $("#txtSexoEdit").val(),
+                EstadoTrabajador: $("#chkEstadoTrabajadorEdit").is(":checked")
+            };
+
+            $.ajax({
+                url: '@Url.Action("EditarColaborador", "Home")',
+                type: "POST",
+                data: JSON.stringify(colaborador),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.success) {
+                        alert(data.message);
+                        $('#tablaColaboradores').DataTable().ajax.reload();
+                        $("#FormModalColaborador").modal("hide");
+                    } else {
+                        alert(data.message);
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function BorrarColaborador(idColaborador) {
+            if (confirm("¿Está seguro de que desea borrar este colaborador?")) {
+                $.ajax({
+                    url: '@Url.Action("BorrarColaborador", "Home")',
+                    type: "POST",
+                    data: JSON.stringify({ idColaborador: idColaborador }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.success) {
+                            alert(data.message);
+                            $('#tablaColaboradores').DataTable().ajax.reload();
+                        } else {
+                            alert(data.message);
+                        }
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            }
+        }
+    </script>
+}

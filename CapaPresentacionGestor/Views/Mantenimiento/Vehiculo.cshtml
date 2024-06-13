@@ -1,0 +1,368 @@
+﻿@{
+    ViewBag.Title = "Vehículos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<ol class="breadcrumb mb-4 mt-4">
+    <li class="breadcrumb-item"><a href="index.html">Resumen</a></li>
+    <li class="breadcrumb-item active">Vehículos</li>
+</ol>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <!-- Icons here -->
+</svg>
+
+<h4 class="mt-4 mb-3 text-left">Información General</h4>
+<form id="formVehiculo">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="ddlProveedor" class="form-label">Proveedor</label>
+                <select class="form-control" id="ddlProveedor">
+                    <!-- Options will be loaded dynamically -->
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="txtCodigoVehiculo" class="form-label">Código del Vehículo</label>
+                <input type="text" class="form-control" id="txtCodigoVehiculo">
+            </div>
+            <div class="mb-3">
+                <label for="ddlTipoVehiculo" class="form-label">Tipo de Vehículo</label>
+                <select class="form-control" id="ddlTipoVehiculo">
+                    <option value="Sedan">Sedan</option>
+                    <option value="SUV">SUV</option>
+                    <option value="Camión">Camión</option>
+                    <option value="Motocicleta">Motocicleta</option>
+                    <!-- Add other options as needed -->
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="txtMotorVehiculo" class="form-label">Motor del Vehículo</label>
+                <input type="text" class="form-control" id="txtMotorVehiculo">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="ddlMarcaVehiculo" class="form-label">Marca del Vehículo</label>
+                <select class="form-control" id="ddlMarcaVehiculo">
+                    <option value="Toyota">Toyota</option>
+                    <option value="Ford">Ford</option>
+                    <option value="Chevrolet">Chevrolet</option>
+                    <option value="Nissan">Nissan</option>
+                    <!-- Add other options as needed -->
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="txtFechaFabricacion" class="form-label">Fecha de Fabricación</label>
+                <input type="date" class="form-control" id="txtFechaFabricacion">
+            </div>
+            <div class="mb-3">
+                <label for="txtColorVehiculo" class="form-label">Color del Vehículo</label>
+                <input type="text" class="form-control" id="txtColorVehiculo">
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="row mt-3">
+    <div class="col-12">
+        <button type="button" class="btn btn-primary" onclick="GuardarNuevoVehiculo()">Guardar</button>
+    </div>
+</div>
+
+
+<br />
+
+<div class="form-group">
+    <form action="" method="post" name="" enctype="multipart/form-data">
+        <label class="col-xs-2 control-label">Documentacion :</label>
+        <div class="col-xs-6">
+            <input type="text" ng-model="archivo" class="form-control" value="Adjuntar archivo" />
+            <input type="file" name="archivo" value="archivo" size="80" />
+        </div>
+        <div class="col-xs-6">
+            <input type="text" ng-model="archivo" class="form-control" value="Adjuntar archivo" />
+            <input type="file" name="archivo" value="archivo" size="80" />
+        </div>
+        <div class="col-xs-6">
+            <input type="text" ng-model="archivo" class="form-control" value="Adjuntar archivo" />
+            <input type="file" name="archivo" value="archivo" size="80" />
+        </div>
+    </form>
+</div>
+
+<br />
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-car me-1"></i> Información del Vehículo
+    </div>
+
+    <div class="card-body">
+        <hr />
+        <table id="tablaVehiculos" class="display cell-border" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Proveedor</th>
+                    <th>Código Vehículo</th>
+                    <th>Tipo Vehículo</th>
+                    <th>Motor Vehículo</th>
+                    <th>Marca Vehículo</th>
+                    <th>Fecha Fabricación</th>
+                    <th>Color Vehículo</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- MODAL EDITAR -->
+<div class="modal fade" id="FormModalVehiculo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="exampleModalLabel">Editar Vehículo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body g-2">
+                <input id="txtIdVehiculo" type="hidden" value="0" />
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label for="ddlProveedorEdit" class="form-label">Proveedor</label>
+                        <select class="form-control" id="ddlProveedorEdit">
+                            <!-- Options will be loaded dynamically -->
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="txtCodigoVehiculoEdit" class="form-label">Código del Vehículo</label>
+                        <input type="text" class="form-control" id="txtCodigoVehiculoEdit">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="ddlTipoVehiculoEdit" class="form-label">Tipo de Vehículo</label>
+                        <select class="form-control" id="ddlTipoVehiculoEdit">
+                            <option value="Sedan">Sedan</option>
+                            <option value="SUV">SUV</option>
+                            <option value="Camión">Camión</option>
+                            <option value="Motocicleta">Motocicleta</option>
+                            <!-- Add other options as needed -->
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="txtMotorVehiculoEdit" class="form-label">Motor del Vehículo</label>
+                        <input type="text" class="form-control" id="txtMotorVehiculoEdit">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="ddlMarcaVehiculoEdit" class="form-label">Marca del Vehículo</label>
+                        <select class="form-control" id="ddlMarcaVehiculoEdit">
+                            <option value="Toyota">Toyota</option>
+                            <option value="Ford">Ford</option>
+                            <option value="Chevrolet">Chevrolet</option>
+                            <option value="Nissan">Nissan</option>
+                            <!-- Add other options as needed -->
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="txtFechaFabricacionEdit" class="form-label">Fecha de Fabricación</label>
+                        <input type="date" class="form-control" id="txtFechaFabricacionEdit">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="txtColorVehiculoEdit" class="form-label">Color del Vehículo</label>
+                        <input type="text" class="form-control" id="txtColorVehiculoEdit">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="GuardarDatosVehiculo()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            ListarVehiculos();
+            CargarProveedores();
+        });
+
+        function ListarVehiculos() {
+            $.ajax({
+                url: '@Url.Action("ListarVehiculos", "Home")',
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    $('#tablaVehiculos').DataTable({
+                        "data": data.data,
+                        "columns": [
+                            { "data": "NombreProveedor" },
+                            { "data": "CodigoVehiculo" },
+                            { "data": "TipoVehiculo" },
+                            { "data": "MotorVehiculo" },
+                            { "data": "MarcaVehiculo" },
+                            { "data": "FechaFabricacion", "render": function (data) {
+                                    return new Date(data).toLocaleDateString();
+                                }
+                            },
+                            { "data": "ColorVehiculo" },
+                            {
+                                "data": "IdVehiculo",
+                                "render": function (data) {
+                                    return `
+                                        <button class='btn btn-warning btn-sm' onclick='EditarVehiculo(${data})'>Editar</button>
+                                        <button class='btn btn-danger btn-sm' onclick='BorrarVehiculo(${data})'>Borrar</button>
+                                    `;
+                                }
+                            }
+                        ]
+                    });
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function CargarProveedores() {
+            $.ajax({
+                url: '@Url.Action("ListarProveedores", "Home")',
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    var proveedorSelect = $('#ddlProveedor');
+                    var proveedorEditSelect = $('#ddlProveedorEdit');
+
+                    proveedorSelect.empty();
+                    proveedorEditSelect.empty();
+
+                    proveedorSelect.append('<option value="">Seleccione un Proveedor</option>');
+                    proveedorEditSelect.append('<option value="">Seleccione un Proveedor</option>');
+
+                    data.data.forEach(function (proveedor) {
+                        proveedorSelect.append('<option value="' + proveedor.IdProveedor + '">' + proveedor.NombreProveedor + '</option>');
+                        proveedorEditSelect.append('<option value="' + proveedor.IdProveedor + '">' + proveedor.NombreProveedor + '</option>');
+                    });
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function GuardarNuevoVehiculo() {
+            var vehiculo = {
+                IdProveedor: $("#ddlProveedor").val(),
+                CodigoVehiculo: $("#txtCodigoVehiculo").val(),
+                TipoVehiculo: $("#ddlTipoVehiculo").val(),
+                MotorVehiculo: $("#txtMotorVehiculo").val(),
+                MarcaVehiculo: $("#ddlMarcaVehiculo").val(),
+                FechaFabricacion: $("#txtFechaFabricacion").val(),
+                ColorVehiculo: $("#txtColorVehiculo").val()
+            };
+
+            $.ajax({
+                url: '@Url.Action("RegistrarVehiculo", "Home")',
+                type: "POST",
+                data: JSON.stringify(vehiculo),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.success) {
+                        alert(data.message);
+                        $('#tablaVehiculos').DataTable().ajax.reload();
+                    } else {
+                        alert(data.message);
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function EditarVehiculo(idVehiculo) {
+            $.ajax({
+                url: '@Url.Action("ListarVehiculos", "Home")',
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    var vehiculo = data.data.find(x => x.IdVehiculo === idVehiculo);
+
+                    if (vehiculo) {
+                        $("#txtIdVehiculo").val(vehiculo.IdVehiculo);
+                        $("#ddlProveedorEdit").val(vehiculo.IdProveedor);
+                        $("#txtCodigoVehiculoEdit").val(vehiculo.CodigoVehiculo);
+                        $("#ddlTipoVehiculoEdit").val(vehiculo.TipoVehiculo);
+                        $("#txtMotorVehiculoEdit").val(vehiculo.MotorVehiculo);
+                        $("#ddlMarcaVehiculoEdit").val(vehiculo.MarcaVehiculo);
+                        $("#txtFechaFabricacionEdit").val(new Date(vehiculo.FechaFabricacion).toISOString().split('T')[0]);
+                        $("#txtColorVehiculoEdit").val(vehiculo.ColorVehiculo);
+
+                        $("#FormModalVehiculo").modal("show");
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function GuardarDatosVehiculo() {
+            var vehiculo = {
+                IdVehiculo: $("#txtIdVehiculo").val(),
+                IdProveedor: $("#ddlProveedorEdit").val(),
+                CodigoVehiculo: $("#txtCodigoVehiculoEdit").val(),
+                TipoVehiculo: $("#ddlTipoVehiculoEdit").val(),
+                MotorVehiculo: $("#txtMotorVehiculoEdit").val(),
+                MarcaVehiculo: $("#ddlMarcaVehiculoEdit").val(),
+                FechaFabricacion: $("#txtFechaFabricacionEdit").val(),
+                ColorVehiculo: $("#txtColorVehiculoEdit").val()
+            };
+
+            $.ajax({
+                url: '@Url.Action("EditarVehiculo", "Home")',
+                type: "POST",
+                data: JSON.stringify(vehiculo),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.success) {
+                        alert(data.message);
+                        $('#tablaVehiculos').DataTable().ajax.reload();
+                        $("#FormModalVehiculo").modal("hide");
+                    } else {
+                        alert(data.message);
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function BorrarVehiculo(idVehiculo) {
+            if (confirm("¿Está seguro de que desea borrar este vehículo?")) {
+                $.ajax({
+                    url: '@Url.Action("BorrarVehiculo", "Home")',
+                    type: "POST",
+                    data: JSON.stringify({ idVehiculo: idVehiculo }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.success) {
+                            alert(data.message);
+                            $('#tablaVehiculos').DataTable().ajax.reload();
+                        } else {
+                            alert(data.message);
+                        }
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            }
+        }
+    </script>
+}

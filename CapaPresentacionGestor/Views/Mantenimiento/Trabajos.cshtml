@@ -1,0 +1,326 @@
+﻿@{
+    ViewBag.Title = "Trabajos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<ol class="breadcrumb mb-4 mt-4">
+    <li class="breadcrumb-item"><a href="index.html">Resumen</a></li>
+    <li class="breadcrumb-item active">Trabajos</li>
+</ol>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <!-- Icons here -->
+</svg>
+
+<h4 class="mt-4 mb-3 text-left">TRABAJOS</h4>
+<form id="formTrabajo">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="ddlProveedor" class="form-label">Proveedor</label>
+                <select class="form-control" id="ddlProveedor">
+                    <!-- Options will be loaded dynamically -->
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="txtCodigoTrabajo" class="form-label">Código del Trabajo</label>
+                <input type="text" class="form-control" id="txtCodigoTrabajo">
+            </div>
+            <div class="mb-3">
+                <label for="ddlTipoTrabajo" class="form-label">Tipo de Trabajo</label>
+                <select class="form-control" id="ddlTipoTrabajo">
+                    <option value="Construcción">Construcción</option>
+                    <option value="Mantenimiento">Mantenimiento</option>
+                    <option value="Reparación">Reparación</option>
+                    <option value="Otro">Otro</option>
+                    <!-- Add other options as needed -->
+                </select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="txtAuxiliarTrabajo1" class="form-label">Auxiliar Trabajo 1</label>
+                <input type="text" class="form-control" id="txtAuxiliarTrabajo1">
+            </div>
+            <div class="mb-3">
+                <label for="txtAuxiliarTrabajo2" class="form-label">Auxiliar Trabajo 2</label>
+                <input type="text" class="form-control" id="txtAuxiliarTrabajo2">
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="row mt-3">
+    <div class="col-12">
+        <button type="button" class="btn btn-primary" onclick="GuardarNuevoTrabajo()">Guardar</button>
+    </div>
+</div>
+
+<br />
+
+<div class="form-group">
+    <form action="" method="post" name="" enctype="multipart/form-data">
+        <label class="col-xs-2 control-label">Documentacion :</label>
+        <div class="col-xs-6">
+            <input type="text" ng-model="archivo" class="form-control" value="Adjuntar archivo" />
+            <input type="file" name="archivo" value="archivo" size="80" />
+        </div>
+        <div class="col-xs-6">
+            <input type="text" ng-model="archivo" class="form-control" value="Adjuntar archivo" />
+            <input type="file" name="archivo" value="archivo" size="80" />
+        </div>
+        <div class="col-xs-6">
+            <input type="text" ng-model="archivo" class="form-control" value="Adjuntar archivo" />
+            <input type="file" name="archivo" value="archivo" size="80" />
+        </div>
+    </form>
+</div>
+
+<br />
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-briefcase me-1"></i> Información del Trabajo
+    </div>
+
+    <div class="card-body">
+        <hr />
+        <table id="tablaTrabajos" class="display cell-border" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Proveedor</th>
+                    <th>Código Trabajo</th>
+                    <th>Tipo Trabajo</th>
+                    <th>Auxiliar Trabajo 1</th>
+                    <th>Auxiliar Trabajo 2</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- MODAL EDITAR -->
+<div class="modal fade" id="FormModalTrabajo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="exampleModalLabel">Editar Trabajo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body g-2">
+                <input id="txtIdTrabajo" type="hidden" value="0" />
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label for="ddlProveedorEdit" class="form-label">Proveedor</label>
+                        <select class="form-control" id="ddlProveedorEdit">
+                            <!-- Options will be loaded dynamically -->
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="txtCodigoTrabajoEdit" class="form-label">Código del Trabajo</label>
+                        <input type="text" class="form-control" id="txtCodigoTrabajoEdit">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="ddlTipoTrabajoEdit" class="form-label">Tipo de Trabajo</label>
+                        <select class="form-control" id="ddlTipoTrabajoEdit">
+                            <option value="Construcción">Construcción</option>
+                            <option value="Mantenimiento">Mantenimiento</option>
+                            <option value="Reparación">Reparación</option>
+                            <option value="Otro">Otro</option>
+                            <!-- Add other options as needed -->
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="txtAuxiliarTrabajo1Edit" class="form-label">Auxiliar Trabajo 1</label>
+                        <input type="text" class="form-control" id="txtAuxiliarTrabajo1Edit">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="txtAuxiliarTrabajo2Edit" class="form-label">Auxiliar Trabajo 2</label>
+                        <input type="text" class="form-control" id="txtAuxiliarTrabajo2Edit">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="GuardarDatosTrabajo()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            ListarTrabajos();
+            CargarProveedores();
+        });
+
+        function ListarTrabajos() {
+            $.ajax({
+                url: '@Url.Action("ListarTrabajos", "Home")',
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    $('#tablaTrabajos').DataTable({
+                        "data": data.data,
+                        "columns": [
+                            { "data": "NombreProveedor" },
+                            { "data": "CodigoTrabajo" },
+                            { "data": "TipoTrabajo" },
+                            { "data": "AuxiliarTrabajo_1" },
+                            { "data": "AuxiliarTrabajo_2" },
+                            {
+                                "data": "IdTrabajo",
+                                "render": function (data) {
+                                    return `
+                                        <button class='btn btn-warning btn-sm' onclick='EditarTrabajo(${data})'>Editar</button>
+                                        <button class='btn btn-danger btn-sm' onclick='BorrarTrabajo(${data})'>Borrar</button>
+                                    `;
+                                }
+                            }
+                        ]
+                    });
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function CargarProveedores() {
+            $.ajax({
+                url: '@Url.Action("ListarProveedores", "Home")',
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    var proveedorSelect = $('#ddlProveedor');
+                    var proveedorEditSelect = $('#ddlProveedorEdit');
+
+                    proveedorSelect.empty();
+                    proveedorEditSelect.empty();
+
+                    proveedorSelect.append('<option value="">Seleccione un Proveedor</option>');
+                    proveedorEditSelect.append('<option value="">Seleccione un Proveedor</option>');
+
+                    data.data.forEach(function (proveedor) {
+                        proveedorSelect.append('<option value="' + proveedor.IdProveedor + '">' + proveedor.NombreProveedor + '</option>');
+                        proveedorEditSelect.append('<option value="' + proveedor.IdProveedor + '">' + proveedor.NombreProveedor + '</option>');
+                    });
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function GuardarNuevoTrabajo() {
+            var trabajo = {
+                IdProveedor: $("#ddlProveedor").val(),
+                CodigoTrabajo: $("#txtCodigoTrabajo").val(),
+                TipoTrabajo: $("#ddlTipoTrabajo").val(),
+                AuxiliarTrabajo_1: $("#txtAuxiliarTrabajo1").val(),
+                AuxiliarTrabajo_2: $("#txtAuxiliarTrabajo2").val()
+            };
+
+            $.ajax({
+                url: '@Url.Action("RegistrarTrabajo", "Home")',
+                type: "POST",
+                data: JSON.stringify(trabajo),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.success) {
+                        alert(data.message);
+                        $('#tablaTrabajos').DataTable().ajax.reload();
+                    } else {
+                        alert(data.message);
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function EditarTrabajo(idTrabajo) {
+            $.ajax({
+                url: '@Url.Action("ListarTrabajos", "Home")',
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    var trabajo = data.data.find(x => x.IdTrabajo === idTrabajo);
+
+                    if (trabajo) {
+                        $("#txtIdTrabajo").val(trabajo.IdTrabajo);
+                        $("#ddlProveedorEdit").val(trabajo.IdProveedor);
+                        $("#txtCodigoTrabajoEdit").val(trabajo.CodigoTrabajo);
+                        $("#ddlTipoTrabajoEdit").val(trabajo.TipoTrabajo);
+                        $("#txtAuxiliarTrabajo1Edit").val(trabajo.AuxiliarTrabajo_1);
+                        $("#txtAuxiliarTrabajo2Edit").val(trabajo.AuxiliarTrabajo_2);
+
+                        $("#FormModalTrabajo").modal("show");
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function GuardarDatosTrabajo() {
+            var trabajo = {
+                IdTrabajo: $("#txtIdTrabajo").val(),
+                IdProveedor: $("#ddlProveedorEdit").val(),
+                CodigoTrabajo: $("#txtCodigoTrabajoEdit").val(),
+                TipoTrabajo: $("#ddlTipoTrabajoEdit").val(),
+                AuxiliarTrabajo_1: $("#txtAuxiliarTrabajo1Edit").val(),
+                AuxiliarTrabajo_2: $("#txtAuxiliarTrabajo2Edit").val()
+            };
+
+            $.ajax({
+                url: '@Url.Action("EditarTrabajo", "Home")',
+                type: "POST",
+                data: JSON.stringify(trabajo),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.success) {
+                        alert(data.message);
+                        $('#tablaTrabajos').DataTable().ajax.reload();
+                        $("#FormModalTrabajo").modal("hide");
+                    } else {
+                        alert(data.message);
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function BorrarTrabajo(idTrabajo) {
+            if (confirm("¿Está seguro de que desea borrar este trabajo?")) {
+                $.ajax({
+                    url: '@Url.Action("BorrarTrabajo", "Home")',
+                    type: "POST",
+                    data: JSON.stringify({ idTrabajo: idTrabajo }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.success) {
+                            alert(data.message);
+                            $('#tablaTrabajos').DataTable().ajax.reload();
+                        } else {
+                            alert(data.message);
+                        }
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            }
+        }
+    </script>
+}

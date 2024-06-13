@@ -1,0 +1,519 @@
+﻿
+@{
+    ViewBag.Title = "Proveedor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<ol class="breadcrumb mb-4 mt-4">
+    <li class="breadcrumb-item"><a href="index.html">Resumen</a></li>
+    <li class="breadcrumb-item active">Proveedor</li>
+</ol>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+    </symbol>
+    <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+    </symbol>
+    <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+    </symbol>
+</svg>
+
+
+
+
+<h4 class="mt-4 mb-3 text-left">Informacion General</h4>
+<form>
+    <!-- Contenido del formulario -->
+    <div class="row">
+        <div class="col-md-6">
+            @*<div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Codigo</label>
+                    <input type="text" class="form-control" id="txtCodigo">
+                </div>*@
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">RUC</label>
+                <input type="text" class="form-control" id="txtRUC">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Razón Social</label>
+                <input type="text" class="form-control" id="txtRazonSocial">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Act. Económica</label>
+                <input type="text" class="form-control" id="txtActEconomica">
+            </div>
+        </div>
+    </div>
+</form>
+
+<h2><span class="badge bg-primary">DATOS DE UBICACION</span></h2>
+
+<form>
+    <!-- Contenido del formulario -->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Dirección</label>
+                <input type="text" class="form-control" id="txtDireccion">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Pais</label>
+                <input type="text" class="form-control" id="txtPais">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Provincia</label>
+                <input type="text" class="form-control" id="txtProvincia">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Referencia</label>
+                <input type="text" class="form-control" id="txtReferencia">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Departamento</label>
+                <input type="text" class="form-control" id="txtDepartamento">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Distrito</label>
+                <input type="text" class="form-control" id="txtDistrito">
+            </div>
+        </div>
+    </div>
+</form>
+
+<h4 class="mt-4 mb-3 text-left">INFORMACION DE RESPONSABLE</h4>
+<form>
+    <!-- Contenido del formulario -->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Nombres</label>
+                <input type="text" class="form-control" id="txtNomResponsable">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Apellido Materno</label>
+                <input type="text" class="form-control" id="txtApeMatRes">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Apellido Paterno</label>
+                <input type="text" class="form-control" id="txtApePatRes">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Teléfono</label>
+                <input type="text" class="form-control" id="txtTelefono">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">E-mail</label>
+                <input type="text" class="form-control" id="txtEmail">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <button type="button" class="btn btn-primary" onclick="GuardarNuevoProveedor()">Guardar</button>
+
+        </div>
+    </div>
+</form>
+<br />
+
+<div class="form-group">
+    <form action="" method="post" name="" enctype="multipart/form-data">
+        <label class="col-xs-2 control-label">Documentacion :</label>
+        <div class="col-xs-6">
+            <input type="text" ng-model="archivo" class="form-control" value="Adjuntar archivo" />
+            <input type="file" name="archivo" value="archivo" size="80" />
+        </div>
+        <div class="col-xs-6">
+            <input type="text" ng-model="archivo" class="form-control" value="Adjuntar archivo" />
+            <input type="file" name="archivo" value="archivo" size="80" />
+        </div>
+        <div class="col-xs-6">
+            <input type="text" ng-model="archivo" class="form-control" value="Adjuntar archivo" />
+            <input type="file" name="archivo" value="archivo" size="80" />
+        </div>
+    </form>
+</div>
+
+<br />
+
+
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-person-booth me-1"></i> Información del Proveedor
+    </div>
+
+    <div class="card-body">
+
+        <hr />
+
+        <table id="tabla" class="display cell-border" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Codigo</th>
+                    <th>RUC</th>
+                    <th>Razon Social</th>
+                    <th>Actividad Economica</th>
+                    @*<th>Direccion</th>
+                        <th>Pais</th>
+                        <th>Provincia</th>
+                        <th>Departamento</th>
+                        <th>Distrito</th>
+                        <th>Referencia</th>
+                        <th>Nombre</th>
+                        <th>Apellido Paterno</th>
+                        <th>Apellido Materno</th>
+                        <th>Telefono</th>
+                        <th>Correo</th>*@
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- MODAL EDITAR -->
+<div class="modal fade" id="FormModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="exampleModalLabel">Editar Proveedor</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body g-2">
+                <input id="txtidproveedor" type="hidden" value="0" />
+                @*<input id="txtidproveedor" value="0" />*@
+                <div class="row">
+
+                    <div class="col-sm-6">
+                        <label for="txtcodigo" class="form-label">Codigo</label>
+                        <input type="text" class="form-control" id="txtcodigo" disabled>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="txtruc" class="form-label">RUC</label>
+                        <input type="text" class="form-control" id="txtruc">
+                    </div>
+                    @*<div class="col-sm-6">
+                            <label for="txtfechaRegistro" class="form-label">Fecha de Registro</label>
+                            <input type="text" class="form-control" id="txtfechaRegistro">
+                        </div>*@
+                    <div class="col-sm-6">
+                        <label for="txtrazonSocial" class="form-label">Razón Social</label>
+                        <input type="text" class="form-control" id="txtrazonSocial">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="txtactividadEconomica" class="form-label">Actividad Económica</label>
+                        <input type="text" class="form-control" id="txtactEconomica">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="txtdireccion" class="form-label">Dirección</label>
+                        <input type="text" class="form-control" id="txtdireccion">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="txtpais" class="form-label">País</label>
+                        <input type="text" class="form-control" id="txtpais">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="txtprovincia" class="form-label">Provincia</label>
+                        <input type="text" class="form-control" id="txtprovincia">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="txtdepartamento" class="form-label">Departamento</label>
+                        <input type="text" class="form-control" id="txtdepartamento">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="txtdistrito" class="form-label">Distrito</label>
+                        <input type="text" class="form-control" id="txtdistrito">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="txtreferencia" class="form-label">Referencia</label>
+                        <input type="text" class="form-control" id="txtreferencia">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="txtnombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="txtnombre">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="txtapellidoPaterno" class="form-label">Apellido Paterno</label>
+                        <input type="text" class="form-control" id="txtapellidoPaterno">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="txtapellidoMaterno" class="form-label">Apellido Materno</label>
+                        <input type="text" class="form-control" id="txtapellidoMaterno">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="txttelefono" class="form-label">Teléfono</label>
+                        <input type="text" class="form-control" id="txttelefono">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="txtcorreo" class="form-label">Correo</label>
+                        <input type="text" class="form-control" id="txtcorreo">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="EditarProveedor()">Guardar Cambios</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL BORRAR -->
+@*<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#BorrarModal">
+        Launch demo modal
+    </button>*@
+<div class="modal fade" id="BorrarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Solicitud</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Desea borrar este registro?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="BorrarProveedor()">Confirmar</button>
+            </div>
+        </div>
+        <br />
+        <div class="alert alert-danger d-flex  alert-dismissible fade show align-items-center" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill" /></svg>
+            <div>
+                An example danger alert with an icon
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+@section scripts{
+    <script>
+    var tabladata;
+    var proveedorId = 0;
+
+    $(document).ready(function () {
+        inicializarTabla();
+        cargarDatos();
+    });
+
+    function inicializarTabla() {
+        tabladata = $("#tabla").DataTable({
+            responsive: true,
+            ordering: false,
+            "ajax": {
+                url: '@Url.Action("ListarProveedor", "Home")',
+                type: "GET",
+                dataType: "json"
+            },
+            "columns": [
+                { "data": "CodigoProveedor" },
+                { "data": "RUC" },
+                { "data": "RazonSocial" },
+                { "data": "ActividadEconomica" },
+                {
+                    "defaultContent": `
+                        <button type="button" class="btn btn-primary btn-sm btn-editar">
+                            <i class="fas fa-pen me-1"></i>
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm ms-2 btn-borrar">
+                            <i class="fas fa-trash me-1"></i>
+                        </button>`,
+                    "orderable": false,
+                    "seachable": false,
+                    "width": "90px"
+                }
+            ],
+            "language": {
+                "url": "https://cdn.datatables.net/plug-ins/2.0.5/i18n/es-ES.json"
+            }
+        });
+
+        $("#tabla tbody").on("click", '.btn-editar', function () {
+            var FilaSeleccionada = $(this).closest("tr");
+            var data = tabladata.row(FilaSeleccionada).data();
+            abrirModal(data);
+        });
+
+        $('#tabla tbody').on('click', '.btn-borrar', function () {
+            var FilaSeleccionada = $(this).closest("tr");
+            var data = tabladata.row(FilaSeleccionada).data();
+            $('#BorrarModal').data('idProveedor', data.IdProveedor).modal('show');
+        });
+    }
+
+    function cargarDatos() {
+        $.ajax({
+            url: '@Url.Action("ListarProveedor", "Home")',
+            type: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                console.log(data);
+            }
+        });
+    }
+
+    function abrirModal(json) {
+        proveedorId = json.IdProveedor;
+        $("#txtcodigo").val(json.CodigoProveedor);
+        $("#txtruc").val(json.RUC);
+        $("#txtrazonSocial").val(json.RazonSocial);
+        $("#txtactEconomica").val(json.ActividadEconomica);
+        $("#txtdireccion").val(json.DireccionProveedor);
+        $("#txtpais").val(json.PaisProveedor);
+        $("#txtprovincia").val(json.ProvinciaProveedor);
+        $("#txtdepartamento").val(json.DepartamentoProveedor);
+        $("#txtdistrito").val(json.DistritoProveedor);
+        $("#txtreferencia").val(json.ReferenciaProovedor);
+        $("#txtnombre").val(json.NombreResponsable);
+        $("#txtapellidoPaterno").val(json.ApellidoPaternoResponsable);
+        $("#txtapellidoMaterno").val(json.ApellidoMaternoResponsable);
+        $("#txttelefono").val(json.TelefonoResponsable);
+        $("#txtcorreo").val(json.CorreoResponsable);
+
+        $("#FormModal").modal("show");
+    }
+
+    function limpiarFormulario() {
+        $('#txtRUC').val('');
+        $('#txtRazonSocial').val('');
+        $('#txtActEconomica').val('');
+        $('#txtDireccion').val('');
+        $('#txtPais').val('');
+        $('#txtProvincia').val('');
+        $('#txtDepartamento').val('');
+        $('#txtDistrito').val('');
+        $('#txtReferencia').val('');
+        $('#txtNomResponsable').val('');
+        $('#txtApeMatRes').val('');
+        $('#txtApePatRes').val('');
+        $('#txtTelefono').val('');
+        $('#txtEmail').val('');
+    }
+
+    function GuardarNuevoProveedor() {
+        var nuevoProveedor = {
+            RUC: $('#txtRUC').val(),
+            RazonSocial: $('#txtRazonSocial').val(),
+            ActividadEconomica: $('#txtActEconomica').val(),
+            DireccionProveedor: $('#txtDireccion').val(),
+            PaisProveedor: $('#txtPais').val(),
+            ProvinciaProveedor: $('#txtProvincia').val(),
+            DepartamentoProveedor: $('#txtDepartamento').val(),
+            DistritoProveedor: $('#txtDistrito').val(),
+            ReferenciaProovedor: $('#txtReferencia').val(),
+            NombreResponsable: $('#txtNomResponsable').val(),
+            ApellidoMaternoResponsable: $('#txtApeMatRes').val(),
+            ApellidoPaternoResponsable: $('#txtApePatRes').val(),
+            TelefonoResponsable: $('#txtTelefono').val(),
+            CorreoResponsable: $('#txtEmail').val()
+        };
+
+        $.ajax({
+            url: '@Url.Action("RegistrarProveedor", "Home")',
+            type: 'POST',
+            data: JSON.stringify(nuevoProveedor),
+            contentType: 'application/json; charset=utf-8',
+            success: function (response) {
+                if (response.success) {
+                    limpiarFormulario();
+                    $('#tabla').DataTable().ajax.reload();
+                } else {
+                    alert("Error al insertar el proveedor: " + response.message);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("Error al insertar el proveedor: " + error);
+            }
+        });
+    }
+
+    function EditarProveedor() {
+        var datosProveedor = {
+            IdProveedor: proveedorId,
+            CodigoProveedor: $("#txtcodigo").val(),
+            RUC: $("#txtruc").val(),
+            RazonSocial: $("#txtrazonSocial").val(),
+            ActividadEconomica: $("#txtactEconomica").val(),
+            DireccionProveedor: $("#txtdireccion").val(),
+            PaisProveedor: $("#txtpais").val(),
+            ProvinciaProveedor: $("#txtprovincia").val(),
+            DepartamentoProveedor: $("#txtdepartamento").val(),
+            DistritoProveedor: $("#txtdistrito").val(),
+            ReferenciaProovedor: $("#txtreferencia").val(),
+            NombreResponsable: $("#txtnombre").val(),
+            ApellidoMaternoResponsable: $("#txtapellidoMaterno").val(),
+            ApellidoPaternoResponsable: $("#txtapellidoPaterno").val(),
+            TelefonoResponsable: $("#txttelefono").val(),
+            CorreoResponsable: $("#txtcorreo").val()
+        };
+
+        $.ajax({
+            url: '/Home/EditarProveedor',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(datosProveedor),
+            success: function (response) {
+                if (response.success) {
+                    $('#tabla').DataTable().ajax.reload();
+                    $('#FormModal').modal('hide');
+                } else {
+                    alert('Error al editar proveedor: ' + response.message);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('Error en la solicitud AJAX: ' + error);
+            }
+        });
+    }
+
+    function BorrarProveedor() {
+        var idProveedor = $('#BorrarModal').data('idProveedor');
+
+        $.ajax({
+            url: '/Home/BorrarProveedor',
+            type: 'POST',
+            data: { idProveedor: idProveedor },
+            success: function (response) {
+                if (response.success) {
+                    $('#tabla').DataTable().ajax.reload();
+                    $('#BorrarModal').modal('hide');
+                } else {
+                    alert('Error al borrar proveedor: ' + response.message);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('Error en la solicitud AJAX: ' + error);
+            }
+        });
+    }
+    </script>
+}
